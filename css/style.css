@@ -4,15 +4,23 @@
 :root {
     --font-family: "Google Sans Code", monospace;
     --font-title: "Archivo Black", sans-serif;
-    --background-color: #000000;
-    --accent-color: #9573e9;
-    --color: rgb(24, 152, 221);
+    --background-color: #ebeb90;
+    --accent-color: #448c33e3;
+    --color: rgb(58, 23, 88);
     --text-color: linen;
 }
 
 html {
-    font-size: 10px;
+    font-size: 100%;
+    box-sizing:border-box;
+    scroll-behavior: smooth;
     text-align: justify;
+}
+@media (min-width:768px) {
+    html{font-size: 150%;}   
+}
+@media (min-width:1024px) {
+    html{font-size: 200%;}
 }
 
 body {
@@ -21,11 +29,17 @@ body {
     font-family: var(--font-family);
     font-size: 1.6em;
 }
+
 main {
    width:80%;
-   margin: 0 auto;
+   margin: 2em auto;
    max-width: 960px;
+   padding: 2em;
+   border: 3px solid var(--accent-color);
+   border-radius: 15px;
+   position: relative;
 }
+
 
 h1,
 h2,
@@ -35,10 +49,18 @@ h3 {
 
 }
 
-h1 {
+/*h1 {
+  
     font-size: 4em;
     text-align: center;
-}
+    transition: transform 0.4s ease;
+} se mueve el titulo en un lado */ 
+ h1:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+} 
+
+
 
 h2 {
     font-size: 2em;
@@ -50,7 +72,7 @@ h3 {
 
 p {
     /* line-height: 1em; */
-    max-width: 40ch;
+    max-width: 90ch;
 }
 ul ol {
   padding:0;
@@ -89,5 +111,12 @@ a:active {
 
 a:hover {
     color: var(--background-color);
-    opacity: 1;
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color),
+                0 0 20px var(--accent-color),
+                0 0 40px var(--accent-color);
+}
+img{
+    max-width: 100%;
+    height: auto;
 }
