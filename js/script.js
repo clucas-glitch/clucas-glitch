@@ -3,13 +3,15 @@
 ========================================================= */
 
 const canvas = document.getElementById("grid-canvas");
+
 const ctx = canvas.getContext("2d");
 
 let w, h;
 
-function resizeGridCanvas() {
+function resizeGridCanvas(){
 
     w = canvas.width = window.innerWidth;
+
     h = canvas.height = window.innerHeight;
 }
 
@@ -20,37 +22,35 @@ window.addEventListener(
     resizeGridCanvas
 );
 
-function drawGrid() {
+function drawGrid(){
 
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0,0,w,h);
 
     const size = 40;
 
-    ctx.strokeStyle = "rgba(255,255,255,0.05)";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle =
+        "rgba(255,255,255,0.05)";
 
-    /* LINEAS VERTICALES */
+    ctx.lineWidth = 1;
 
     for(let x = 0; x < w; x += size){
 
         ctx.beginPath();
 
-        ctx.moveTo(x, 0);
+        ctx.moveTo(x,0);
 
-        ctx.lineTo(x, h);
+        ctx.lineTo(x,h);
 
         ctx.stroke();
     }
-
-    /* LINEAS HORIZONTALES */
 
     for(let y = 0; y < h; y += size){
 
         ctx.beginPath();
 
-        ctx.moveTo(0, y);
+        ctx.moveTo(0,y);
 
-        ctx.lineTo(w, y);
+        ctx.lineTo(w,y);
 
         ctx.stroke();
     }
@@ -73,10 +73,7 @@ const collage =
 
 let current = 0;
 
-let lastX = 0;
-let lastY = 0;
-
-function showImage(x, y){
+function showImage(x,y){
 
     const img = images[current];
 
@@ -85,76 +82,63 @@ function showImage(x, y){
 
     gsap.killTweensOf(img);
 
-    gsap.set(img, {
+    gsap.set(img,{
 
-        opacity: 1,
+        opacity:1,
 
-        x: x - 120,
+        x:x - 120,
 
-        y: y - 160,
+        y:y - 160,
 
-        scale: 0.8,
+        scale:0.8,
 
         rotation:
-        gsap.utils.random(-10, 10)
+        gsap.utils.random(-10,10)
     });
 
-    gsap.to(img, {
+    gsap.to(img,{
 
-        scale: 1,
+        scale:1,
 
-        duration: 0.45,
+        duration:0.45,
 
-        ease: "power3.out"
+        ease:"power3.out"
     });
 
-    gsap.to(img, {
+    gsap.to(img,{
 
-        opacity: 0,
+        opacity:0,
 
-        duration: 1.2,
+        duration:1.2,
 
-        delay: 0.35,
+        delay:0.3,
 
-        ease: "power2.out"
+        ease:"power2.out"
     });
 }
 
 /* =========================================================
-   DESKTOP
+   MOUSE
 ========================================================= */
 
-collage.addEventListener("mousemove", (e)=>{
+collage.addEventListener("mousemove",e=>{
 
     const rect =
         collage.getBoundingClientRect();
 
-    const x =
-        e.clientX - rect.left;
+    showImage(
 
-    const y =
-        e.clientY - rect.top;
+        e.clientX - rect.left,
 
-    const distance =
-        Math.hypot(
-            x - lastX,
-            y - lastY
-        );
-
-    if(distance > 60){
-
-        showImage(x, y);
-
-        lastX = x;
-        lastY = y;
-    }
+        e.clientY - rect.top
+    );
 });
 
 /* =========================================================
-   MOBILE
+   TOUCH MOVIL
 ========================================================= */
 
-collage.addEventListener("touchmove", (e)=>{
+collage.addEventListener("touchmove",e=>{
 
     const rect =
         collage.getBoundingClientRect();
@@ -162,317 +146,333 @@ collage.addEventListener("touchmove", (e)=>{
     const touch =
         e.touches[0];
 
-    const x =
-        touch.clientX - rect.left;
+    showImage(
 
-    const y =
-        touch.clientY - rect.top;
+        touch.clientX - rect.left,
 
-    const distance =
-        Math.hypot(
-            x - lastX,
-            y - lastY
-        );
-
-    /* EN CELULAR MAS SENSIBLE */
-
-    if(distance > 25){
-
-        showImage(x, y);
-
-        lastX = x;
-        lastY = y;
-    }
+        touch.clientY - rect.top
+    );
 });
 
 /* =========================================================
-   P5 PARTICLES TEXT
+   PARTICULAS TEXTO
 ========================================================= */
 
-new p5((p)=>{
+let font;
 
-    let particles = [];
+let particles = [];
 
-    let font;
+function preload() {
 
-    /* =====================================================
-       PRELOAD
-    ===================================================== */
+    font = loadFont(
+        'https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Regular.otf'
+    );
+}
 
-    p.preload = ()=>{
+/* =========================================================
+   SETUP
+========================================================= */
 
-        font = p.loadFont(
-            "https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/font/SourceCodePro-Regular.otf"
-        );
-    };
+function setup() {
 
-    /* =====================================================
-       SETUP
-    ===================================================== */
+    const container =
+        document.getElementById("texto-particles");
 
-    p.setup = ()=>{
+    let canvas = createCanvas(
 
-        const container =
-            document.getElementById("texto-particles");
+        container.offsetWidth,
 
-        const canvas =
-            p.createCanvas(
-                container.offsetWidth,
-                container.offsetHeight
-            );
+        container.offsetHeight
+    );
 
-        canvas.parent("texto-particles");
+    canvas.parent("texto-particles");
 
-        generarTexto();
-    };
+    clear();
 
-    /* =====================================================
-       GENERAR TEXTO
-    ===================================================== */
+    generarTexto();
+}
 
-    function generarTexto(){
+/* =========================================================
+   GENERAR TEXTO
+========================================================= */
 
-        particles = [];
+function generarTexto() {
 
-        let pg =
-            p.createGraphics(
-                p.width,
-                p.height
-            );
+    particles = [];
 
-        pg.pixelDensity(1);
+    let pg =
+        createGraphics(width,height);
 
-        pg.clear();
+    pg.pixelDensity(1);
 
-        pg.fill(255);
+    pg.clear();
 
-        pg.textFont(font);
+    pg.fill(255);
 
-        /* RESPONSIVE */
+    pg.noStroke();
 
-        let titleSize =
-            window.innerWidth < 768
-            ? 52
-            : 120;
+    pg.textFont(font);
 
-        let subSize =
-            window.innerWidth < 768
-            ? 18
-            : 30;
+    /* RESPONSIVE */
 
-        pg.textAlign(
-            p.CENTER,
-            p.CENTER
-        );
+    let sizeText =
+        windowWidth < 768
+        ? 38
+        : 82;
 
-        /* TITULO */
+    pg.textSize(sizeText);
 
-        pg.textSize(titleSize);
+    pg.textAlign(CENTER,CENTER);
 
-        pg.text(
-            "VIBRAS",
-            p.width / 2,
-            p.height / 2 - 100
-        );
+    pg.textLeading(sizeText * 1.4);
 
-        pg.text(
-            "BONITAS",
-            p.width / 2,
-            p.height / 2
-        );
+    /* NUEVA FRASE */
 
-        /* SUBTEXTO */
+    const texto = `
+DISEÑANDO
+MI FUTURO
+CON ESTILO
+PROPIO
+`;
 
-        pg.textSize(subSize);
+    pg.text(
 
-        pg.text(
-            "computación creativa ✦ arte ✦ fotografía",
-            p.width / 2,
-            p.height / 2 + 90
-        );
+        texto,
 
-        pg.loadPixels();
+        width / 2,
 
-        for(let x = 0; x < p.width; x += 7){
+        height / 2
+    );
 
-            for(let y = 0; y < p.height; y += 7){
+    pg.loadPixels();
 
-                let index =
-                    (x + y * p.width) * 4;
+    /* MUCHAS PARTICULAS */
 
-                let brightness =
-                    pg.pixels[index];
+    let density =
+        windowWidth < 768
+        ? 3
+        : 4;
 
-                if(brightness > 200){
+    for(let x = 0; x < width; x += density){
 
-                    particles.push(
-                        new Particle(x, y)
-                    );
-                }
+        for(let y = 0; y < height; y += density){
+
+            let index =
+                (x + y * width) * 4;
+
+            let brightness =
+                pg.pixels[index];
+
+            if(brightness > 180){
+
+                particles.push(
+                    new Particle(x,y)
+                );
             }
         }
     }
+}
 
-    /* =====================================================
-       PARTICULA
-    ===================================================== */
+/* =========================================================
+   DRAW
+========================================================= */
 
-    class Particle{
+function draw() {
 
-        constructor(x, y){
+    clear();
 
-            this.target =
-                p.createVector(x, y);
+    let activar =
+        window.scrollY > 50;
 
-            /* empiezan dispersas */
+    for(let p of particles){
 
-            this.pos =
-                p.createVector(
-                    p.random(p.width),
-                    p.random(p.height)
-                );
+        p.behaviors(activar);
 
-            this.vel =
-                p.createVector();
+        p.update();
 
-            this.acc =
-                p.createVector();
+        p.show();
+    }
+}
 
-            this.size =
-                p.random(2, 5);
-        }
+/* =========================================================
+   PARTICULA
+========================================================= */
 
-        behaviors(activarTexto){
+class Particle {
 
-            /* =============================================
-               SCROLL = FORMAR TEXTO
-            ============================================= */
+    constructor(x,y){
 
-            if(activarTexto){
+        this.target =
+            createVector(x,y);
 
-                let arrive =
-                    p5.Vector.sub(
-                        this.target,
-                        this.pos
-                    );
+        /* empiezan dispersas */
 
-                arrive.setMag(0.6);
+        this.pos =
+            createVector(
 
-                this.applyForce(arrive);
-            }
+                random(width),
 
-            /* =============================================
-               MOUSE / TOUCH = SEPARAR
-            ============================================= */
+                random(height)
+            );
 
-            let mx = p.mouseX;
-            let my = p.mouseY;
+        this.vel =
+            createVector();
 
-            if(p.touches.length > 0){
+        this.acc =
+            createVector();
 
-                mx = p.touches[0].x;
-                my = p.touches[0].y;
-            }
+        /* tamaños */
 
-            let mouse =
-                p.createVector(mx, my);
+        this.size =
+            random(
+                windowWidth < 768 ? 2.5 : 2,
+                windowWidth < 768 ? 6 : 5
+            );
 
-            let dir =
+        /* colores */
+
+        this.color = random([
+
+            [192,132,252],
+
+            [96,165,250],
+
+            [255,255,255],
+
+            [170,120,255]
+        ]);
+    }
+
+    behaviors(activarTexto){
+
+        /* =================================================
+           FORMAR TEXTO
+        ================================================= */
+
+        if(activarTexto){
+
+            let arrive =
                 p5.Vector.sub(
-                    this.pos,
-                    mouse
+                    this.target,
+                    this.pos
                 );
 
-            let d = dir.mag();
+            arrive.setMag(1);
 
-            let rango =
-                window.innerWidth < 768
-                ? 140
-                : 90;
-
-            if(d < rango){
-
-                dir.setMag(8);
-
-                this.applyForce(dir);
-            }
+            this.applyForce(arrive);
         }
 
-        applyForce(force){
+        /* =================================================
+           MOUSE / TOUCH
+        ================================================= */
 
-            this.acc.add(force);
+        let mx = mouseX;
+
+        let my = mouseY;
+
+        if(touches.length > 0){
+
+            mx = touches[0].x;
+
+            my = touches[0].y;
         }
 
-        update(){
+        let mouse =
+            createVector(mx,my);
 
-            this.vel.add(this.acc);
-
-            this.vel.mult(0.92);
-
-            this.pos.add(this.vel);
-
-            this.acc.mult(0);
-        }
-
-        show(){
-
-            p.noStroke();
-
-            /* GLOW */
-
-            p.drawingContext.shadowBlur = 18;
-
-            p.drawingContext.shadowColor =
-                "rgba(192,132,252,0.9)";
-
-            p.fill(170, 120, 255);
-
-            p.circle(
-                this.pos.x,
-                this.pos.y,
-                this.size
+        let dir =
+            p5.Vector.sub(
+                this.pos,
+                mouse
             );
+
+        let d = dir.mag();
+
+        let rango =
+            windowWidth < 768
+            ? 170
+            : 100;
+
+        if(d < rango){
+
+            dir.setMag(12);
+
+            this.applyForce(dir);
         }
     }
 
-    /* =====================================================
-       DRAW
-    ===================================================== */
+    applyForce(force){
 
-    p.draw = ()=>{
+        this.acc.add(force);
+    }
 
-        p.clear();
+    update(){
 
-        /* CUANDO HACEN SCROLL */
+        this.vel.add(this.acc);
 
-        let activar =
-            window.scrollY > 120;
+        this.vel.mult(0.90);
 
-        for(let particle of particles){
+        this.pos.add(this.vel);
 
-            particle.behaviors(activar);
+        this.acc.mult(0);
+    }
 
-            particle.update();
+    show(){
 
-            particle.show();
-        }
-    };
+        noStroke();
 
-    /* =====================================================
-       RESPONSIVE
-    ===================================================== */
+        /* GLOW */
 
-    p.windowResized = ()=>{
+        drawingContext.shadowBlur =
+            windowWidth < 768
+            ? 28
+            : 20;
 
-        const container =
-            document.getElementById("texto-particles");
+        drawingContext.shadowColor =
+            `rgba(
+                ${this.color[0]},
+                ${this.color[1]},
+                ${this.color[2]},
+                0.95
+            )`;
 
-        p.resizeCanvas(
-            container.offsetWidth,
-            container.offsetHeight
+        fill(
+
+            this.color[0],
+
+            this.color[1],
+
+            this.color[2]
         );
 
-        generarTexto();
-    };
+        circle(
 
-});
+            this.pos.x,
+
+            this.pos.y,
+
+            this.size
+        );
+    }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+function windowResized(){
+
+    resizeGridCanvas();
+
+    const container =
+        document.getElementById("texto-particles");
+
+    resizeCanvas(
+
+        container.offsetWidth,
+
+        container.offsetHeight
+    );
+
+    generarTexto();
+}
