@@ -1,7 +1,3 @@
-/* =========================================================
-   VARIABLES
-========================================================= */
-
 :root{
 
     --font-family: "Google Sans Code", monospace;
@@ -15,15 +11,7 @@
     --secondary-color: #60a5fa;
 
     --text-color: #f3ecff;
-
-    --glass-color: rgba(255,255,255,0.05);
-
-    --border-glass: rgba(255,255,255,0.10);
 }
-
-/* =========================================================
-   CONFIG GENERAL
-========================================================= */
 
 html{
 
@@ -62,18 +50,12 @@ body{
 
     font-family: var(--font-family);
 
-    font-size: 1.2em;
-
     overflow-x: hidden;
 
     min-height: 100vh;
-
-    position: relative;
 }
 
-/* =========================================================
-   FONDO GRID
-========================================================= */
+/* GRID */
 
 #grid-canvas{
 
@@ -88,28 +70,22 @@ body{
     z-index: -5;
 }
 
-/* =========================================================
-   MAIN
-========================================================= */
+/* MAIN */
 
 main{
 
-    width: 80%;
+    width: 85%;
 
     max-width: 1100px;
 
     margin: 2em auto;
-
-    padding: 2em;
 
     position: relative;
 
     z-index: 10;
 }
 
-/* =========================================================
-   FOTO PERFIL
-========================================================= */
+/* FOTO */
 
 .foto-perfil{
 
@@ -125,28 +101,12 @@ main{
 
     top: 180px;
 
-    right: -70px;
+    right: -60px;
 
     border: 2px solid rgba(255,255,255,0.15);
-
-    transition: .4s ease;
-
-    z-index: 20;
 }
 
-.foto-perfil:hover{
-
-    transform: scale(1.08);
-
-    box-shadow:
-    0 0 10px #c084fc,
-    0 0 20px #7c3aed,
-    0 0 40px #60a5fa;
-}
-
-/* =========================================================
-   TITULO
-========================================================= */
+/* TITULO */
 
 .pressure-text{
 
@@ -156,22 +116,18 @@ main{
 
     align-items: center;
 
-    justify-content: center;
-
     margin-bottom: 2em;
-
-    cursor: pointer;
 }
 
 .titulo-linea{
 
     display: flex;
 
-    justify-content: center;
-
     gap: 5px;
 
     flex-wrap: wrap;
+
+    justify-content: center;
 }
 
 .pressure-text span{
@@ -182,57 +138,38 @@ main{
 
     color: #d8c4ff;
 
-    user-select: none;
-
-    transition:
-    transform .25s ease,
-    color .25s ease,
-    text-shadow .25s ease,
-    filter .25s ease;
+    transition: .25s ease;
 }
 
 .pressure-text span:hover{
 
+    transform: scale(1.2);
+
     color: white;
-
-    transform: scale(1.35);
-
-    filter: brightness(1.2);
 
     text-shadow:
     0 0 10px #c084fc,
-    0 0 20px #7c3aed,
-    0 0 40px #312e81,
-    0 0 70px #60a5fa;
+    0 0 20px #7c3aed;
 }
 
 .bonitas{
 
-    margin-top: -18px;
+    margin-top: -15px;
 }
 
-.bonitas span{
-
-    font-size: clamp(4rem, 12vw, 9rem);
-}
-
-/* =========================================================
-   TEXTO PARTICULAS
-========================================================= */
+/* PARTICULAS */
 
 .texto-particulas{
 
     position: relative;
 
-    min-height: 500px;
-
-    margin-top: 3em;
-
-    margin-bottom: 5em;
+    min-height: 420px;
 
     border-radius: 30px;
 
     overflow: hidden;
+
+    margin-top: 3em;
 
     background:
     linear-gradient(
@@ -241,15 +178,8 @@ main{
         rgba(255,255,255,0.02)
     );
 
-    backdrop-filter: blur(12px);
-
     border: 1px solid rgba(255,255,255,0.08);
-
-    box-shadow:
-    0 0 30px rgba(192,132,252,0.08);
 }
-
-/* CANVAS PARTICULAS */
 
 #texto-particles{
 
@@ -260,49 +190,40 @@ main{
     width: 100%;
 
     height: 100%;
-
-    z-index: 1;
 }
 
-/* TEXTO ORIGINAL */
+.frase-overlay{
 
-.contenido-texto{
+    position: absolute;
 
-    position: relative;
+    inset: 0;
 
-    z-index: 2;
+    display: flex;
 
-    opacity: 0;
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: clamp(1.4rem,4vw,3rem);
+
+    font-weight: bold;
+
+    color: rgba(255,255,255,0.04);
+
+    letter-spacing: 2px;
+
+    padding: 1em;
 
     pointer-events: none;
-
-    padding: 4em 3em;
 }
 
-/* =========================================================
-   PARRAFOS
-========================================================= */
-
-p{
-
-    max-width: 90ch;
-
-    line-height: 1.8;
-
-    margin-bottom: 1.5em;
-
-    color: #ece8ff;
-}
-
-/* =========================================================
-   GALERIA
-========================================================= */
+/* GALERIA */
 
 .collage-section{
 
-    margin-top: 8em;
-
-    min-height: 120vh;
+    margin-top: 7em;
 
     position: relative;
 }
@@ -313,15 +234,10 @@ p{
 
     font-size: 3rem;
 
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
 
     color: #d8c4ff;
-
-    text-shadow:
-    0 0 10px rgba(192,132,252,0.5);
 }
-
-/* CONTENEDOR */
 
 .content{
 
@@ -332,13 +248,7 @@ p{
     position: relative;
 
     overflow: hidden;
-
-    background: transparent;
 }
-
-/* =========================================================
-   IMAGENES
-========================================================= */
 
 .content__img{
 
@@ -353,36 +263,19 @@ p{
 
     opacity: 0;
 
+    border-radius: 24px;
+
     overflow: hidden;
 
     pointer-events: none;
 
-    border-radius: 22px;
-
     background: rgba(255,255,255,0.04);
-
-    backdrop-filter: blur(10px);
 
     border: 1px solid rgba(255,255,255,0.08);
 
-    mix-blend-mode: screen;
-
     box-shadow:
-    0 0 20px rgba(168,85,247,0.2),
-    0 0 40px rgba(59,130,246,0.1);
+    0 0 15px rgba(168,85,247,0.10);
 }
-
-.content__img:nth-child(odd){
-
-    transform: rotate(-3deg);
-}
-
-.content__img:nth-child(even){
-
-    transform: rotate(3deg);
-}
-
-/* IMAGEN */
 
 .content__img-inner{
 
@@ -395,99 +288,145 @@ p{
     background-repeat: no-repeat;
 
     background-size: contain;
-
-    filter:
-    brightness(0.96)
-    contrast(1.05);
 }
 
-/* GLOW */
+/* SCROLL */
 
-.content__img::before{
+.scroll-indicator{
 
-    content: "";
+    display: flex;
 
-    position: absolute;
+    flex-direction: column;
 
-    inset: 0;
+    align-items: center;
 
-    border-radius: inherit;
+    gap: .5em;
+
+    margin-bottom: 2em;
+
+    animation: floatScroll 2s ease-in-out infinite;
+}
+
+.scroll-indicator span{
+
+    font-size: .8rem;
+
+    letter-spacing: 4px;
+
+    color: rgba(255,255,255,0.7);
+}
+
+.scroll-indicator .line{
+
+    width: 2px;
+
+    height: 60px;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(192,132,252,0),
+        rgba(192,132,252,1)
+    );
+}
+
+@keyframes floatScroll{
+
+    0%{
+        transform: translateY(0px);
+    }
+
+    50%{
+        transform: translateY(10px);
+    }
+
+    100%{
+        transform: translateY(0px);
+    }
+}
+
+/* CONTACTO */
+
+.contacto-box{
+
+    margin-top: 5em;
+
+    padding: 2em;
+
+    border-radius: 30px;
 
     background:
     linear-gradient(
         135deg,
-        rgba(192,132,252,0.08),
+        rgba(192,132,252,0.10),
         rgba(96,165,250,0.08)
     );
 
-    pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.10);
+
+    text-align: center;
 }
 
-/* =========================================================
-   LINKS
-========================================================= */
+.contacto-box h3{
+
+    font-size: 2.5rem;
+
+    margin-bottom: .4em;
+}
+
+.contacto-box p{
+
+    margin-bottom: 1.5em;
+
+    opacity: .8;
+}
+
+/* LINKS */
 
 .links{
 
     display: flex;
 
-    flex-wrap: wrap;
-
     justify-content: center;
 
-    margin-top: 5em;
+    flex-wrap: wrap;
 
     gap: 1em;
 }
 
-a{
+.links a{
 
     padding: .9em 1.2em;
 
+    border-radius: 18px;
+
     text-decoration: none;
-
-    border-radius: 16px;
-
-    text-align: center;
-
-    display: inline-block;
-
-    min-width: 130px;
 
     color: #d8c4ff;
 
     background: rgba(255,255,255,0.05);
 
-    border: 1px solid rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.08);
 
-    backdrop-filter: blur(8px);
-
-    transition: all .4s ease;
+    transition: .3s ease;
 }
 
-a:hover{
-
-    color: white;
+.links a:hover{
 
     transform: translateY(-4px);
 
-    box-shadow:
-    0 0 10px #c084fc,
-    0 0 20px #7c3aed,
-    0 0 40px #312e81;
+    background: rgba(255,255,255,0.08);
+
+    color: white;
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* RESPONSIVE */
 
-@media (max-width: 768px){
+@media (max-width:768px){
 
     main{
 
         width: 92%;
-
-        padding: 1em;
     }
 
     .foto-perfil{
@@ -502,21 +441,6 @@ a:hover{
         margin: 2em auto;
     }
 
-    .texto-particulas{
-
-        min-height: 650px;
-    }
-
-    .contenido-texto{
-
-        padding: 2em;
-    }
-
-    .galeria-titulo{
-
-        font-size: 2rem;
-    }
-
     .content{
 
         height: 70vh;
@@ -527,16 +451,10 @@ a:hover{
         width: 190px;
 
         height: 250px;
-
-        box-shadow:
-        0 0 30px rgba(192,132,252,0.4),
-        0 0 50px rgba(96,165,250,0.2);
     }
 
-    .pressure-text span{
+    .texto-particulas{
 
-        text-shadow:
-        0 0 10px #c084fc,
-        0 0 20px #7c3aed;
+        min-height: 340px;
     }
 }

@@ -73,7 +73,20 @@ const collage =
 
 let current = 0;
 
+let lastMove = 0;
+
 function showImage(x,y){
+
+    const now = Date.now();
+
+    /* evita spam */
+
+    if(now - lastMove < 160){
+
+        return;
+    }
+
+    lastMove = now;
 
     const img = images[current];
 
@@ -90,11 +103,13 @@ function showImage(x,y){
 
         y:y - 160,
 
-        scale:0.8,
+        scale:0.82,
 
         rotation:
         gsap.utils.random(-10,10)
     });
+
+    /* ENTRADA */
 
     gsap.to(img,{
 
@@ -105,13 +120,28 @@ function showImage(x,y){
         ease:"power3.out"
     });
 
+    /* FLOTACION */
+
+    gsap.to(img,{
+
+        y:`+=${gsap.utils.random(-20,20)}`,
+
+        x:`+=${gsap.utils.random(-15,15)}`,
+
+        duration:2.5,
+
+        ease:"sine.inOut"
+    });
+
+    /* SALIDA */
+
     gsap.to(img,{
 
         opacity:0,
 
-        duration:1.2,
+        duration:1.8,
 
-        delay:0.3,
+        delay:0.8,
 
         ease:"power2.out"
     });
@@ -226,13 +256,15 @@ function generarTexto() {
 
     pg.textLeading(sizeText * 1.4);
 
-    /* NUEVA FRASE */
+    /* TEXTO */
 
     const texto = `
+
 DISEÑANDO
 MI FUTURO
 CON ESTILO
 PROPIO
+
 `;
 
     pg.text(
@@ -246,7 +278,7 @@ PROPIO
 
     pg.loadPixels();
 
-    /* MUCHAS PARTICULAS */
+    /* DENSIDAD */
 
     let density =
         windowWidth < 768
@@ -305,8 +337,6 @@ class Particle {
         this.target =
             createVector(x,y);
 
-        /* empiezan dispersas */
-
         this.pos =
             createVector(
 
@@ -321,15 +351,11 @@ class Particle {
         this.acc =
             createVector();
 
-        /* tamaños */
-
         this.size =
             random(
                 windowWidth < 768 ? 2.5 : 2,
                 windowWidth < 768 ? 6 : 5
             );
-
-        /* colores */
 
         this.color = random([
 
@@ -345,9 +371,7 @@ class Particle {
 
     behaviors(activarTexto){
 
-        /* =================================================
-           FORMAR TEXTO
-        ================================================= */
+        /* FORMAR TEXTO */
 
         if(activarTexto){
 
@@ -362,9 +386,7 @@ class Particle {
             this.applyForce(arrive);
         }
 
-        /* =================================================
-           MOUSE / TOUCH
-        ================================================= */
+        /* MOUSE / TOUCH */
 
         let mx = mouseX;
 
@@ -420,8 +442,6 @@ class Particle {
     show(){
 
         noStroke();
-
-        /* GLOW */
 
         drawingContext.shadowBlur =
             windowWidth < 768
