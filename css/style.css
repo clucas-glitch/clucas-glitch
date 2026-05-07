@@ -192,31 +192,41 @@ main{
     height: 100%;
 }
 
-.frase-overlay{
+/* PARTICULAS */
+
+.texto-particulas{
+
+    position: relative;
+
+    min-height: 420px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    margin-top: 3em;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.02)
+    );
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+#texto-particles{
 
     position: absolute;
 
     inset: 0;
 
-    display: flex;
+    width: 100%;
 
-    align-items: center;
+    height: 100%;
 
-    justify-content: center;
-
-    text-align: center;
-
-    font-size: clamp(1.4rem,4vw,3rem);
-
-    font-weight: bold;
-
-    color: rgba(255,255,255,0.04);
-
-    letter-spacing: 2px;
-
-    padding: 1em;
-
-    pointer-events: none;
+    z-index: 2;
 }
 
 /* GALERIA */
