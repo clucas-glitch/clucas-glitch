@@ -1,7 +1,3 @@
-/* =========================
-   VARIABLES GENERALES
-========================= */
-
 :root{
 
     --font-family: "Google Sans Code", monospace;
@@ -15,26 +11,25 @@
     --secondary-color: #60a5fa;
 
     --text-color: #f3ecff;
-
-    --glass-color: rgba(255,255,255,0.05);
-
-    --border-glass: rgba(255,255,255,0.10);
 }
 
 /* =========================
-   CONFIGURACION GENERAL
+   GENERAL
 ========================= */
 
 html{
-    font-size: 100%;
-    box-sizing: border-box;
+
     scroll-behavior: smooth;
+
+    box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after{
+
     box-sizing: inherit;
+
     margin: 0;
     padding: 0;
 }
@@ -42,112 +37,83 @@ html{
 body{
 
     background:
-    radial-gradient(circle at top left, rgba(192,132,252,0.12), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(96,165,250,0.12), transparent 30%),
+    radial-gradient(circle at top left,
+    rgba(192,132,252,0.14),
+    transparent 30%),
+
+    radial-gradient(circle at bottom right,
+    rgba(96,165,250,0.14),
+    transparent 30%),
+
     var(--background-color);
 
     color: var(--text-color);
 
     font-family: var(--font-family);
 
-    font-size: 1.2em;
-
     overflow-x: hidden;
 
     min-height: 100vh;
-
-    position: relative;
 }
 
 /* =========================
-   RESPONSIVE
-========================= */
-
-@media (min-width:768px){
-
-    html{
-        font-size: 120%;
-    }
-}
-
-@media (min-width:1024px){
-
-    html{
-        font-size: 140%;
-    }
-}
-
-/* =========================
-   CANVAS FONDO
-========================= */
-
-#grid-canvas{
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: -2;
-}
-
-/* =========================
-   CONTENEDOR PRINCIPAL
+   MAIN
 ========================= */
 
 main{
 
-    width: 80%;
+    width: 85%;
 
-    max-width: 960px;
+    max-width: 1100px;
 
-    margin: 2em auto;
+    margin: auto;
 
-    padding: 2em;
+    padding: 3em 0;
 
     position: relative;
-
-    background: transparent;
-
-    border: none;
-
-    box-shadow: none;
 
     z-index: 10;
 }
 
 /* =========================
-   TITULOS
+   FOTO PERFIL
 ========================= */
 
-h1,
-h2,
-h3{
+.foto-perfil{
 
-    font-family: var(--font-title);
+    width: 140px;
 
-    text-transform: uppercase;
+    height: 140px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    position: absolute;
+
+    right: -60px;
+
+    top: 180px;
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+    0 0 20px rgba(192,132,252,0.3);
+
+    transition: .4s ease;
 }
 
-h2{
+.foto-perfil:hover{
 
-    font-size: 2em;
+    transform: scale(1.08);
 
-    margin-bottom: .5em;
-}
-
-h3{
-
-    font-size: 1.5em;
-
-    margin-bottom: .5em;
+    box-shadow:
+    0 0 20px #c084fc,
+    0 0 50px #60a5fa;
 }
 
 /* =========================
-   TITULO INTERACTIVO
+   TITULO
 ========================= */
 
 .pressure-text{
@@ -158,27 +124,19 @@ h3{
 
     align-items: center;
 
-    justify-content: center;
-
     margin-bottom: 2em;
-
-    cursor: pointer;
 }
-
-/* LINEAS DEL TITULO */
 
 .titulo-linea{
 
     display: flex;
 
+    flex-wrap: wrap;
+
     justify-content: center;
 
     gap: 5px;
-
-    flex-wrap: wrap;
 }
-
-/* LETRAS */
 
 .pressure-text span{
 
@@ -188,24 +146,19 @@ h3{
 
     color: #d8c4ff;
 
+    cursor: pointer;
+
     transition:
-    transform .25s ease,
-    color .25s ease,
-    text-shadow .25s ease,
-    filter .25s ease;
+    .25s ease;
 
     user-select: none;
 }
-
-/* EFECTO HOVER */
 
 .pressure-text span:hover{
 
     color: white;
 
-    transform: scale(1.35);
-
-    filter: brightness(1.2);
+    transform: scale(1.25);
 
     text-shadow:
     0 0 10px #c084fc,
@@ -213,8 +166,6 @@ h3{
     0 0 40px #312e81,
     0 0 70px #60a5fa;
 }
-
-/* SEGUNDA PALABRA */
 
 .bonitas{
 
@@ -227,134 +178,50 @@ h3{
 }
 
 /* =========================
-   TEXTO
+   TEXTO PARTICULAS
 ========================= */
 
-p{
+.texto-particulas{
 
-    max-width: 90ch;
+    position: relative;
 
-    line-height: 1.7;
+    min-height: 450px;
 
-    margin-bottom: 1.2em;
-
-    color: #ece8ff;
+    margin-top: 3em;
 }
 
-li{
-
-    color: #ece8ff;
-
-    margin-left: 1.5em;
-
-    margin-bottom: .3em;
-}
-
-ul,
-ol{
-
-    margin: 1em 0;
-}
-
-/* =========================
-   LINKS
-========================= */
-
-a{
-
-    padding: .8em 1.1em;
-
-    text-decoration: none;
-
-    border-radius: 16px;
-
-    text-align: center;
-
-    display: inline-block;
-
-    margin: .5em;
-
-    width: 120px;
-
-    color: #d8c4ff;
-
-    background: rgba(255,255,255,0.05);
-
-    border: 1px solid rgba(255,255,255,0.10);
-
-    backdrop-filter: blur(8px);
-
-    transition: all .4s ease;
-}
-
-a:hover{
-
-    color: white;
-
-    transform: translateY(-4px);
-
-    box-shadow:
-    0 0 10px #c084fc,
-    0 0 20px #7c3aed,
-    0 0 40px #312e81;
-}
-
-a:visited{
-
-    color: #d8c4ff;
-}
-
-a:focus{
-
-    outline: none;
-}
-
-/* =========================
-   FOTO PERFIL
-========================= */
-
-img{
-
-    max-width: 100%;
-
-    height: auto;
-}
-
-.foto-perfil{
-
-    width: 130px;
-
-    height: 130px;
-
-    border-radius: 50%;
-
-    object-fit: cover;
+#texto-particles{
 
     position: absolute;
 
-    top: 190px;
+    inset: 0;
 
-    right: -70px;
-
-    border: 2px solid rgba(255,255,255,0.15);
-
-    transition: .4s ease;
-
-    z-index: 50;
+    z-index: 1;
 }
 
-.foto-perfil:hover{
+.contenido-texto{
 
-    transform: scale(1.08);
+    position: relative;
 
-    box-shadow:
-    0 0 10px #c084fc,
-    0 0 20px #7c3aed,
-    0 0 50px #60a5fa;
+    z-index: 5;
+
+    padding: 2em;
+}
+
+p{
+
+    line-height: 1.8;
+
+    margin-bottom: 1.5em;
+
+    font-size: 1.1rem;
+
+    text-shadow:
+    0 0 10px rgba(192,132,252,0.15);
 }
 
 /* =========================
-   COLLAGE / IMAGE TRAIL
+   GALERIA
 ========================= */
 
 .collage-section{
@@ -362,11 +229,7 @@ img{
     margin-top: 8em;
 
     min-height: 120vh;
-
-    position: relative;
 }
-
-/* TITULO GALERIA */
 
 .galeria-titulo{
 
@@ -379,10 +242,8 @@ img{
     color: #d8c4ff;
 
     text-shadow:
-    0 0 10px rgba(192,132,252,0.5);
+    0 0 20px rgba(192,132,252,0.6);
 }
-
-/* CONTENEDOR */
 
 .content{
 
@@ -392,68 +253,51 @@ img{
 
     position: relative;
 
-    z-index: 100;
-
     overflow: hidden;
-
-    background: transparent;
 }
 
 /* =========================
-   IMAGENES COLLAGE
+   IMAGENES
 ========================= */
 
 .content__img{
 
-    width: 280px;
+    width: 320px;
 
-    height: 360px;
+    height: 420px;
 
     position: absolute;
 
-    top: 0;
-    left: 0;
-
     opacity: 0;
+
+    border-radius: 24px;
 
     overflow: hidden;
 
     pointer-events: none;
 
-    will-change: transform, filter;
-
-    border-radius: 22px;
-
-    background: rgba(255,255,255,0.04);
-
     backdrop-filter: blur(10px);
 
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
 
-    mix-blend-mode: screen;
+    background: rgba(255,255,255,0.05);
 
     box-shadow:
-    0 0 20px rgba(168,85,247,0.2),
-    0 0 40px rgba(59,130,246,0.1);
+    0 0 30px rgba(192,132,252,0.2),
+    0 0 50px rgba(96,165,250,0.12);
 
-    transition:
-    transform .4s ease,
-    box-shadow .4s ease;
+    will-change: transform, filter;
 }
-
-/* ROTACION COLLAGE */
 
 .content__img:nth-child(odd){
 
-    transform: rotate(-3deg);
+    transform: rotate(-4deg);
 }
 
 .content__img:nth-child(even){
 
-    transform: rotate(3deg);
+    transform: rotate(4deg);
 }
-
-/* INTERIOR IMAGEN */
 
 .content__img-inner{
 
@@ -466,47 +310,53 @@ img{
     background-repeat: no-repeat;
 
     background-size: contain;
-
-    filter:
-    brightness(0.95)
-    contrast(1.05);
 }
 
 /* =========================
-   GLOW EXTRA
+   LINKS
 ========================= */
 
-.content__img::before{
+.links{
 
-    content: "";
+    margin-top: 4em;
+}
 
-    position: absolute;
+a{
 
-    inset: 0;
+    display: inline-block;
 
-    border-radius: inherit;
+    margin: .5em;
 
-    background:
-    linear-gradient(
-        135deg,
-        rgba(192,132,252,0.08),
-        rgba(96,165,250,0.08)
-    );
+    padding: .9em 1.2em;
 
-    pointer-events: none;
+    border-radius: 16px;
+
+    text-decoration: none;
+
+    color: #d8c4ff;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(8px);
+
+    transition: .3s ease;
+}
+
+a:hover{
+
+    transform: translateY(-5px);
+
+    color: white;
+
+    box-shadow:
+    0 0 15px #c084fc,
+    0 0 30px #60a5fa;
 }
 
 /* =========================
-   SCROLL SUAVE
-========================= */
-
-section{
-
-    scroll-margin-top: 100px;
-}
-
-/* =========================
-   RESPONSIVE MOVIL
+   RESPONSIVE
 ========================= */
 
 @media (max-width:768px){
@@ -515,23 +365,98 @@ section{
 
         position: relative;
 
-        top: auto;
         right: auto;
+        top: auto;
 
         display: block;
 
-        margin: 2em auto;
+        margin: 0 auto 2em auto;
+    }
+
+    .content{
+
+        height: 75vh;
     }
 
     .content__img{
 
-        width: 190px;
+        width: 220px;
 
-        height: 250px;
+        height: 300px;
+
+        box-shadow:
+        0 0 40px rgba(192,132,252,0.35),
+        0 0 80px rgba(96,165,250,0.2);
     }
 
-    .galeria-titulo{
+    .pressure-text span{
 
-        font-size: 2rem;
+        text-shadow:
+        0 0 15px #c084fc,
+        0 0 30px #60a5fa;
+    }
+
+    p{
+
+        font-size: 1rem;
+    }
+}
+/* ======================================================
+   TEXTO PARTICULAS
+====================================================== */
+
+.texto-particulas{
+
+    position: relative;
+
+    margin-top: 4em;
+
+    margin-bottom: 8em;
+
+    min-height: 650px;
+}
+
+/* CANVAS */
+
+#texto-particles{
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    z-index: 1;
+
+    pointer-events: none;
+}
+
+/* TEXTO */
+
+.contenido-texto{
+
+    position: relative;
+
+    z-index: 5;
+
+    padding-top: 18em;
+}
+
+/* ======================================================
+   MOVIL
+====================================================== */
+
+@media (max-width:768px){
+
+    .texto-particulas{
+
+        min-height: 500px;
+    }
+
+    .contenido-texto{
+
+        padding-top: 14em;
     }
 }
